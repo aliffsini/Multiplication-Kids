@@ -44,7 +44,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
   const handleCustomCountChange = (value: string) => {
     setCustomCount(value);
     const num = parseInt(value);
-    if (num >= 5 && num <= 100) {
+    if (!isNaN(num) && num >= 3 && num <= 100) {
       setQuestionCount(num);
     }
   };
@@ -153,9 +153,9 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
               {[5, 10, 15].map(count => (
                 <Button
                   key={count}
-                  variant={questionCount === count && !customCount ? "default" : "outline"}
+                  variant={questionCount === count && !customCount.trim() ? "default" : "outline"}
                   className={`py-3 px-4 font-bold text-lg border-3 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 ${
-                    questionCount === count && !customCount 
+                    questionCount === count && !customCount.trim()
                       ? "bg-purple-100 border-brand-purple ring-4 ring-purple-300 shadow-xl text-purple-900" 
                       : "border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-brand-purple"
                   }`}
@@ -170,7 +170,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
               <Input
                 type="number"
                 placeholder="Enter number"
-                min="5"
+                min="3"
                 max="100"
                 value={customCount}
                 onChange={(e) => handleCustomCountChange(e.target.value)}
