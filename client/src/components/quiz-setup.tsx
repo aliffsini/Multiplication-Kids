@@ -101,7 +101,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                 key={table}
                 className={`cursor-pointer transition-all duration-200 hover:shadow-lg border-3 ${
                   selectedTables.includes(table) 
-                    ? 'border-brand-purple bg-purple-50 ring-2 ring-purple-200 shadow-lg transform scale-105' 
+                    ? 'border-brand-purple bg-purple-100 ring-4 ring-purple-300 shadow-xl transform scale-105' 
                     : 'border-slate-200 hover:border-brand-purple hover:bg-purple-25'
                 }`}
                 onClick={() => toggleTable(table)}
@@ -156,7 +156,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                   variant={questionCount === count && !customCount ? "default" : "outline"}
                   className={`py-3 px-4 font-bold text-lg border-3 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 ${
                     questionCount === count && !customCount 
-                      ? "bg-gradient-to-r from-brand-purple to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-brand-purple ring-4 ring-purple-200" 
+                      ? "bg-brand-purple hover:bg-purple-700 text-black border-brand-purple ring-4 ring-purple-200" 
                       : "border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-brand-purple"
                   }`}
                   onClick={() => handleQuestionCountChange(count)}
@@ -232,7 +232,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           )}
           <Button
             onClick={handleStartQuiz}
-            className="bg-gradient-to-r from-brand-purple via-purple-600 to-brand-cyan text-white font-bold text-xl py-6 px-16 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300 border-0"
+            className="bg-gradient-to-r from-purple-600 via-brand-purple to-brand-cyan text-white font-bold text-xl py-6 px-16 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300 border-0"
             size="lg"
           >
             <Play className="h-7 w-7 mr-4" />
