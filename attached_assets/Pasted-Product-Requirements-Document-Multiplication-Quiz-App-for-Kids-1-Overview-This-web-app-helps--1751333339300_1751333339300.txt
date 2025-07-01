@@ -1,0 +1,89 @@
+Product Requirements Document: Multiplication Quiz App for Kids
+🧩 1. Overview
+This web app helps children practice multiplication through a gamified quiz. It supports multiple difficulty levels, customizable question sets, and motivational feedback. The app will be deployed on Vercel's free plan and designed for a responsive, fun, and educational experience.
+
+🎯 2. Goals and Objectives
+Help children master multiplication tables (2–12).
+
+Provide adjustable difficulty levels.
+
+Allow parents/teachers to tailor quiz sessions.
+
+Encourage learning through engaging visuals and rewards.
+
+Be easy to deploy and share via web (hosted on Vercel).
+
+📱 3. Key Features
+3.1 Quiz Modes
+Mode	Tables Included
+Easy	2, 3, 4
+Medium	5, 6, 7
+Hard	8, 9, 12
+Extreme	2–12 (excludes 1, 2, 10, 11 on the other side of the pair)
+
+Extreme Rules: Always vary questions and exclude commutative pairs (e.g., 7×8 vs. 8×7) unless they are spaced at least 5 questions apart.
+
+3.2 Customization Options
+Table Selection: Manual selection (e.g., only 5s and 9s).
+
+Question Count: Preset (10, 20, 30) or custom input.
+
+Timer Mode:
+
+Countdown timer (e.g., 10 seconds)
+
+No time limit mode
+
+Question Format: Horizontal (e.g., 7 × 8 = ?).
+
+3.3 Quiz Flow
+User selects mode/tables and settings.
+
+Quiz starts and presents questions one at a time.
+
+Immediate feedback on correct/incorrect (optional animation or sound).
+
+Final screen:
+
+Summary of performance
+
+List of all questions, correct answers, and user answers
+
+Buttons: "Restart Quiz", "Share Results"
+
+🧠 4. Smart Question Generator
+Avoid Commutative Duplicates: If 3×7 appears, delay 7×3 by at least 5 questions.
+
+Randomization: Ensure questions are varied within the selected tables.
+
+Extreme Mode Logic: More complex number pairings; prioritize harder combos.
+
+🎨 5. Design & UX
+Colorful UI with cheerful tones (for ages 6–11)
+
+Animated feedback for correct answers (e.g., stars, confetti)
+
+Score/Progress Bar visible during quiz
+
+Accessible fonts and large buttons
+
+Responsive for mobile, tablet, and desktop
+
+💾 6. Technical Requirements
+Frontend Framework: React.js or Next.js (for Vercel deployment)
+
+Hosting: Vercel (Free Plan)
+
+No backend required unless user tracking or history is added
+
+Share Button: Web Share API (native share or fallback copy-to-clipboard)
+
+🔧 7. Future Features (Stretch Goals)
+Reward badges or trophies
+
+📌 8. Constraints
+No persistent data (initial version)
+
+Runs entirely in browser
+
+Must work offline or with flaky connection (optional PWA)
