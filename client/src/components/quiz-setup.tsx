@@ -74,6 +74,23 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
     }
   };
 
+  const getTableColors = (table: number) => {
+    const colorSchemes = {
+      2: { bg: 'bg-red-100', border: 'border-red-300', text: 'text-red-700', hover: 'hover:bg-red-200', selected: 'bg-red-200 border-red-500 ring-red-300' },
+      3: { bg: 'bg-orange-100', border: 'border-orange-300', text: 'text-orange-700', hover: 'hover:bg-orange-200', selected: 'bg-orange-200 border-orange-500 ring-orange-300' },
+      4: { bg: 'bg-yellow-100', border: 'border-yellow-300', text: 'text-yellow-700', hover: 'hover:bg-yellow-200', selected: 'bg-yellow-200 border-yellow-500 ring-yellow-300' },
+      5: { bg: 'bg-green-100', border: 'border-green-300', text: 'text-green-700', hover: 'hover:bg-green-200', selected: 'bg-green-200 border-green-500 ring-green-300' },
+      6: { bg: 'bg-teal-100', border: 'border-teal-300', text: 'text-teal-700', hover: 'hover:bg-teal-200', selected: 'bg-teal-200 border-teal-500 ring-teal-300' },
+      7: { bg: 'bg-blue-100', border: 'border-blue-300', text: 'text-blue-700', hover: 'hover:bg-blue-200', selected: 'bg-blue-200 border-blue-500 ring-blue-300' },
+      8: { bg: 'bg-indigo-100', border: 'border-indigo-300', text: 'text-indigo-700', hover: 'hover:bg-indigo-200', selected: 'bg-indigo-200 border-indigo-500 ring-indigo-300' },
+      9: { bg: 'bg-purple-100', border: 'border-purple-300', text: 'text-purple-700', hover: 'hover:bg-purple-200', selected: 'bg-purple-200 border-purple-500 ring-purple-300' },
+      10: { bg: 'bg-pink-100', border: 'border-pink-300', text: 'text-pink-700', hover: 'hover:bg-pink-200', selected: 'bg-pink-200 border-pink-500 ring-pink-300' },
+      11: { bg: 'bg-rose-100', border: 'border-rose-300', text: 'text-rose-700', hover: 'hover:bg-rose-200', selected: 'bg-rose-200 border-rose-500 ring-rose-300' },
+      12: { bg: 'bg-cyan-100', border: 'border-cyan-300', text: 'text-cyan-700', hover: 'hover:bg-cyan-200', selected: 'bg-cyan-200 border-cyan-500 ring-cyan-300' }
+    };
+    return colorSchemes[table as keyof typeof colorSchemes] || colorSchemes[2];
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       {/* Header */}
@@ -96,22 +113,25 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           </h2>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11 gap-4 mb-6">
-            {availableTables.map(table => (
-              <Card 
-                key={table}
-                className={`cursor-pointer transition-all duration-200 hover:shadow-lg border-3 ${
-                  selectedTables.includes(table) 
-                    ? 'border-brand-purple bg-purple-100 ring-4 ring-purple-300 shadow-xl transform scale-105' 
-                    : 'border-slate-200 hover:border-brand-purple hover:bg-purple-25'
-                }`}
-                onClick={() => toggleTable(table)}
-              >
-                <CardContent className="p-4 text-center">
-                  <div className="text-3xl font-bold text-brand-purple mb-2">{table}×</div>
-                  <div className="text-sm text-slate-600">Times {table}</div>
-                </CardContent>
-              </Card>
-            ))}
+            {availableTables.map(table => {
+              const colors = getTableColors(table);
+              return (
+                <Card 
+                  key={table}
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-xl border-3 transform hover:scale-105 ${
+                    selectedTables.includes(table) 
+                      ? `${colors.selected} ring-4 shadow-xl scale-105` 
+                      : `${colors.bg} ${colors.border} ${colors.hover} hover:shadow-lg`
+                  }`}
+                  onClick={() => toggleTable(table)}
+                >
+                  <CardContent className="p-4 text-center">
+                    <div className={`text-3xl font-bold mb-2 ${colors.text}`}>{table}×</div>
+                    <div className="text-sm text-slate-600">Times {table}</div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
 
           {/* Difficulty Presets */}
