@@ -13,7 +13,7 @@ export class QuizGenerator {
     const possiblePairs: Array<{ a: number; b: number }> = [];
     
     for (const table of selectedTables) {
-      for (let multiplier = 1; multiplier <= 12; multiplier++) {
+      for (let multiplier = 2; multiplier <= 12; multiplier++) {
         possiblePairs.push({ a: table, b: multiplier });
       }
     }

@@ -184,7 +184,7 @@ export function QuizInterface({
           <div className="text-center">
             <Button
               onClick={handleNext}
-              className="bg-white text-brand-purple font-bold text-lg py-4 px-10 hover:bg-gray-50 border-2 border-white shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 rounded-xl"
+              className="bg-white text-purple-900 font-bold text-lg py-4 px-10 hover:bg-gray-50 border-2 border-white shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 rounded-xl"
               size="lg"
             >
               Next Question <ArrowRight className="h-6 w-6 ml-3" />

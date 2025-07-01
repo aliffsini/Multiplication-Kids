@@ -156,7 +156,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                   variant={questionCount === count && !customCount ? "default" : "outline"}
                   className={`py-3 px-4 font-bold text-lg border-3 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 ${
                     questionCount === count && !customCount 
-                      ? "bg-purple-100 border-brand-purple ring-4 ring-purple-300 shadow-xl text-brand-purple" 
+                      ? "bg-purple-100 border-brand-purple ring-4 ring-purple-300 shadow-xl text-purple-900" 
                       : "border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-brand-purple"
                   }`}
                   onClick={() => handleQuestionCountChange(count)}
