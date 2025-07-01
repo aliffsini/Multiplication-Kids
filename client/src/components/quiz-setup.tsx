@@ -99,21 +99,16 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
             {availableTables.map(table => (
               <Card 
                 key={table}
-                className={`cursor-pointer transition-all duration-200 hover:shadow-lg border-2 ${
+                className={`cursor-pointer transition-all duration-200 hover:shadow-lg border-3 ${
                   selectedTables.includes(table) 
-                    ? 'border-brand-purple bg-purple-50' 
-                    : 'border-transparent hover:border-brand-purple'
+                    ? 'border-brand-purple bg-purple-50 ring-2 ring-purple-200 shadow-lg transform scale-105' 
+                    : 'border-slate-200 hover:border-brand-purple hover:bg-purple-25'
                 }`}
                 onClick={() => toggleTable(table)}
               >
                 <CardContent className="p-4 text-center">
                   <div className="text-3xl font-bold text-brand-purple mb-2">{table}×</div>
                   <div className="text-sm text-slate-600">Times {table}</div>
-                  {selectedTables.includes(table) && (
-                    <div className="mt-2 w-4 h-4 mx-auto rounded-full bg-brand-purple flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
-                    </div>
-                  )}
                 </CardContent>
               </Card>
             ))}
@@ -138,7 +133,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                     <span className="font-bold">{config.name}</span>
                   </div>
                   <div className="text-xs opacity-80 font-medium">
-                    {config.tables.join('×, ')}×
+                    {key === 'extreme' ? 'All tables' : config.tables.join('×, ') + '×'}
                   </div>
                 </Button>
               ))}
@@ -159,10 +154,10 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                 <Button
                   key={count}
                   variant={questionCount === count && !customCount ? "default" : "outline"}
-                  className={`py-3 px-4 font-bold text-lg border-2 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 ${
+                  className={`py-3 px-4 font-bold text-lg border-3 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 ${
                     questionCount === count && !customCount 
-                      ? "bg-gradient-to-r from-brand-purple to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-brand-purple" 
-                      : "border-brand-purple text-brand-purple hover:bg-purple-50"
+                      ? "bg-gradient-to-r from-brand-purple to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-brand-purple ring-4 ring-purple-200" 
+                      : "border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-brand-purple"
                   }`}
                   onClick={() => handleQuestionCountChange(count)}
                 >
@@ -171,7 +166,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
               ))}
             </div>
             <div className="flex items-center gap-2">
-              <label className="text-sm text-slate-600">Custom:</label>
+              <label className="text-sm text-slate-600 font-medium">Custom:</label>
               <Input
                 type="number"
                 placeholder="Enter number"
@@ -179,7 +174,11 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                 max="100"
                 value={customCount}
                 onChange={(e) => handleCustomCountChange(e.target.value)}
-                className="flex-1"
+                className={`flex-1 font-bold text-lg ${
+                  customCount && customCount.trim() 
+                    ? 'border-2 border-brand-purple bg-purple-50 text-brand-purple ring-2 ring-purple-100' 
+                    : 'border-slate-300'
+                }`}
               />
             </div>
           </Card>
