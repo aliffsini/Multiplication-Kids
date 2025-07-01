@@ -122,6 +122,7 @@ export default function Home() {
           onAnswerSubmit={handleAnswerSubmit}
           onNextQuestion={handleNextQuestion}
           onQuizComplete={handleQuizComplete}
+          onGoHome={handleNewQuiz}
           score={quizState.score}
         />
       );

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
-import { Check, ArrowRight, Timer } from 'lucide-react';
+import { Check, ArrowRight, Timer, Home } from 'lucide-react';
 import { Question, QuizSettings } from '@/types/quiz';
 
 interface QuizInterfaceProps {
@@ -13,6 +13,7 @@ interface QuizInterfaceProps {
   onAnswerSubmit: (answer: number) => void;
   onNextQuestion: () => void;
   onQuizComplete: () => void;
+  onGoHome: () => void;
   score: number;
 }
 
@@ -23,6 +24,7 @@ export function QuizInterface({
   onAnswerSubmit,
   onNextQuestion,
   onQuizComplete,
+  onGoHome,
   score
 }: QuizInterfaceProps) {
   const [userAnswer, setUserAnswer] = useState<string>('');
@@ -108,7 +110,17 @@ export function QuizInterface({
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Quiz Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4">Multiplication Challenge</h2>
+          <div className="flex justify-between items-center mb-4">
+            <Button
+              onClick={onGoHome}
+              className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-medium px-4 py-2 rounded-lg border border-white border-opacity-30 transition-all duration-200"
+            >
+              <Home className="h-4 w-4 mr-2" />
+              Home
+            </Button>
+            <h2 className="text-3xl font-bold">Multiplication Challenge</h2>
+            <div className="w-20"></div> {/* Spacer for centering */}
+          </div>
           <Progress value={progress} className="max-w-md mx-auto mb-4 h-4 bg-white bg-opacity-20" />
           <div className="flex justify-between max-w-md mx-auto text-sm opacity-90">
             <span>Question {currentQuestionIndex + 1} of {questions.length}</span>

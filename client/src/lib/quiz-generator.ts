@@ -40,38 +40,24 @@ export class QuizGenerator {
   }
 
   private selectNextPair(possiblePairs: Array<{ a: number; b: number }>): { a: number; b: number } {
-    // Filter out pairs that would create commutative duplicates within the window
+    // Filter out pairs that would create duplicates within the window
     const availablePairs = possiblePairs.filter(pair => {
-      return !this.isCommutativeDuplicate(pair) && !this.isConsecutiveDuplicate(pair);
+      return !this.isRecentDuplicate(pair);
     });
 
-    // If no pairs available, try with just commutative filter
-    let pairsToChooseFrom = availablePairs;
-    if (pairsToChooseFrom.length === 0) {
-      pairsToChooseFrom = possiblePairs.filter(pair => !this.isCommutativeDuplicate(pair));
-    }
+    // If no pairs available, use any pair (rare scenario with limited options)
+    const pairsToChooseFrom = availablePairs.length > 0 ? availablePairs : possiblePairs;
     
-    // If still no pairs, use any pair (unlikely scenario)
-    if (pairsToChooseFrom.length === 0) {
-      pairsToChooseFrom = possiblePairs;
-    }
-    
-    // Select first available pair for better distribution
-    return pairsToChooseFrom[0];
+    // Select random pair from available options
+    const randomIndex = Math.floor(Math.random() * pairsToChooseFrom.length);
+    return pairsToChooseFrom[randomIndex];
   }
 
-  private isCommutativeDuplicate(pair: { a: number; b: number }): boolean {
+  private isRecentDuplicate(pair: { a: number; b: number }): boolean {
     return this.recentPairs.some(recent => 
       (recent.a === pair.a && recent.b === pair.b) ||
       (recent.a === pair.b && recent.b === pair.a)
     );
-  }
-
-  private isConsecutiveDuplicate(pair: { a: number; b: number }): boolean {
-    if (this.recentPairs.length === 0) return false;
-    const lastPair = this.recentPairs[this.recentPairs.length - 1];
-    return (lastPair.a === pair.a && lastPair.b === pair.b) ||
-           (lastPair.a === pair.b && lastPair.b === pair.a);
   }
 
   private addToRecentPairs(pair: { a: number; b: number }): void {
