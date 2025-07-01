@@ -222,6 +222,25 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           </Card>
         </section>
 
+        {/* Start Quiz */}
+        <section className="text-center mb-10">
+          {showValidation && (
+            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-lg mb-4 inline-flex items-center">
+              <TriangleAlert className="h-5 w-5 mr-2" />
+              Please select at least one times table to start the quiz!
+            </div>
+          )}
+          <Button
+            onClick={handleStartQuiz}
+            className="bg-gradient-to-r from-purple-600 via-brand-purple to-brand-cyan text-white font-bold text-xl py-6 px-16 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300 border-0"
+            size="lg"
+          >
+            <Play className="h-7 w-7 mr-4" />
+            Start Multiplication Quiz
+          </Button>
+          <p className="text-slate-600 mt-3">Get ready to show off your multiplication skills!</p>
+        </section>
+
         {/* Educational Benefits Section */}
         <section className="mb-10">
           <Card className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
@@ -246,25 +265,6 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
               </div>
             </div>
           </Card>
-        </section>
-
-        {/* Start Quiz */}
-        <section className="text-center">
-          {showValidation && (
-            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-lg mb-4 inline-flex items-center">
-              <TriangleAlert className="h-5 w-5 mr-2" />
-              Please select at least one times table to start the quiz!
-            </div>
-          )}
-          <Button
-            onClick={handleStartQuiz}
-            className="bg-gradient-to-r from-purple-600 via-brand-purple to-brand-cyan text-white font-bold text-xl py-6 px-16 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300 border-0"
-            size="lg"
-          >
-            <Play className="h-7 w-7 mr-4" />
-            Start Multiplication Quiz
-          </Button>
-          <p className="text-slate-600 mt-3">Get ready to show off your multiplication skills!</p>
         </section>
 
         {/* Footer Content for SEO */}
