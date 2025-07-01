@@ -63,7 +63,7 @@ export function ResultsScreen({ questions, score, onRestartQuiz, onNewQuiz }: Re
         {/* Results Header */}
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">🏆</div>
-          <h2 className="text-4xl font-bold mb-4">Quiz Complete!</h2>
+          <h2 className="text-4xl font-bold mb-4">Multiplication Quiz Results</h2>
           <Card className="max-w-md mx-auto">
             <CardContent className="pt-6 text-slate-800">
               <div className={`text-5xl font-bold mb-2 ${getScoreColor()}`}>
@@ -84,7 +84,7 @@ export function ResultsScreen({ questions, score, onRestartQuiz, onNewQuiz }: Re
           <CardContent className="p-6 text-slate-800">
             <h3 className="text-2xl font-bold mb-4 text-center">
               <ClipboardList className="inline h-6 w-6 text-brand-purple mr-2" />
-              Detailed Review
+              Times Tables Answers Review
             </h3>
             <ScrollArea className="h-80 w-full rounded-lg border">
               <div className="p-4 space-y-3">

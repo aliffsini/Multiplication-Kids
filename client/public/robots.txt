@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://multiplication-for-kids.replit.app/sitemap.xml

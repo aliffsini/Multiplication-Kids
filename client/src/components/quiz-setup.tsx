@@ -81,9 +81,9 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
         <div className="max-w-6xl mx-auto px-4 py-6 text-center">
           <h1 className="text-4xl font-bold text-slate-800 mb-2">
             <Calculator className="inline h-10 w-10 text-brand-purple mr-3" />
-            Multiplication Quiz
+            Multiplication for Kids - Times Tables Quiz
           </h1>
-          <p className="text-lg text-slate-600">Practice your times tables and become a math champion!</p>
+          <p className="text-lg text-slate-600">Interactive multiplication games to practice times tables and master math skills through fun learning!</p>
         </div>
       </header>
 
@@ -92,7 +92,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-slate-800 mb-6 text-center">
             <Grid3X3 className="inline h-6 w-6 text-brand-cyan mr-2" />
-            Choose Your Times Tables
+            Select Multiplication Tables to Practice
           </h2>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11 gap-4 mb-6">
@@ -118,7 +118,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           <Card className="p-6 mb-8">
             <h3 className="text-lg font-semibold text-slate-700 mb-4 text-center">
               <Bolt className="inline h-5 w-5 text-brand-amber mr-2" />
-              Quick Difficulty Presets
+              Multiplication Difficulty Levels
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {Object.entries(DIFFICULTY_PRESETS).map(([key, config]) => (
@@ -147,7 +147,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           <Card className="p-6">
             <h3 className="text-lg font-semibold text-slate-700 mb-4">
               <ListOrdered className="inline h-5 w-5 text-brand-cyan mr-2" />
-              Number of Questions
+              Quiz Length - Number of Multiplication Questions
             </h3>
             <div className="grid grid-cols-3 gap-3 mb-4">
               {[5, 10, 15].map(count => (
@@ -187,7 +187,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           <Card className="p-6">
             <h3 className="text-lg font-semibold text-slate-700 mb-4">
               <Clock className="inline h-5 w-5 text-brand-amber mr-2" />
-              Timer Settings
+              Math Quiz Timer Options
             </h3>
             <div className="mb-4">
               <label className="flex items-center gap-3 cursor-pointer">
@@ -222,6 +222,32 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           </Card>
         </section>
 
+        {/* Educational Benefits Section */}
+        <section className="mb-10">
+          <Card className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
+            <h3 className="text-xl font-semibold text-slate-800 mb-4 text-center">
+              Why Practice Multiplication for Kids?
+            </h3>
+            <div className="grid md:grid-cols-3 gap-4 text-center">
+              <div>
+                <div className="text-3xl mb-2">🧠</div>
+                <h4 className="font-semibold text-slate-700 mb-2">Build Math Confidence</h4>
+                <p className="text-sm text-slate-600">Regular practice helps children master times tables and feel confident with math skills.</p>
+              </div>
+              <div>
+                <div className="text-3xl mb-2">⚡</div>
+                <h4 className="font-semibold text-slate-700 mb-2">Improve Mental Math Speed</h4>
+                <p className="text-sm text-slate-600">Quick multiplication recall is essential for advanced math concepts and everyday calculations.</p>
+              </div>
+              <div>
+                <div className="text-3xl mb-2">🎯</div>
+                <h4 className="font-semibold text-slate-700 mb-2">Fun Learning Experience</h4>
+                <p className="text-sm text-slate-600">Interactive games make multiplication practice enjoyable and engaging for young learners.</p>
+              </div>
+            </div>
+          </Card>
+        </section>
+
         {/* Start Quiz */}
         <section className="text-center">
           {showValidation && (
@@ -236,10 +262,31 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
             size="lg"
           >
             <Play className="h-7 w-7 mr-4" />
-            Start Quiz Adventure!
+            Start Multiplication Quiz
           </Button>
           <p className="text-slate-600 mt-3">Get ready to show off your multiplication skills!</p>
         </section>
+
+        {/* Footer Content for SEO */}
+        <footer className="mt-16 text-center">
+          <Card className="p-6 bg-slate-50 border-slate-200">
+            <h4 className="text-lg font-semibold text-slate-800 mb-3">Free Online Multiplication Practice</h4>
+            <p className="text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Our interactive multiplication quiz helps children learn times tables through engaging gameplay. 
+              Perfect for elementary students looking to improve their math skills with customizable difficulty levels, 
+              instant feedback, and progress tracking. Start practicing multiplication today!
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 mt-4 text-xs text-slate-500">
+              <span>times tables quiz</span>
+              <span>•</span>
+              <span>multiplication practice</span>
+              <span>•</span>
+              <span>math games for children</span>
+              <span>•</span>
+              <span>elementary math learning</span>
+            </div>
+          </Card>
+        </footer>
       </main>
     </div>
   );
