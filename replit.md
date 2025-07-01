@@ -105,6 +105,13 @@ Changelog:
   * Added educational benefits section explaining learning advantages
   * Created sitemap.xml and robots.txt for better search engine indexing
   * Optimized page title and descriptions without age ranges
+- July 01, 2025. Project cleanup for deployment:
+  * Removed attached_assets folder (development-only files)
+  * Removed drizzle.config.ts (not needed for in-memory storage)
+  * Removed 41 unused UI components, keeping only 7 essential ones
+  * Removed unused hooks directory (use-mobile, use-toast)
+  * Cleaned up imports and dependencies for smaller bundle size
+  * Optimized project structure for Vercel deployment
 ```
 
 ## User Preferences
