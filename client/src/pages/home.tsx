@@ -12,7 +12,7 @@ export default function Home() {
   const [quizState, setQuizState] = useState<QuizState>({
     settings: {
       selectedTables: [],
-      questionCount: 20,
+      questionCount: 10,
       timerEnabled: false,
       timePerQuestion: 10
     },
@@ -97,7 +97,7 @@ export default function Home() {
     setQuizState({
       settings: {
         selectedTables: [],
-        questionCount: 20,
+        questionCount: 10,
         timerEnabled: false,
         timePerQuestion: 10
       },

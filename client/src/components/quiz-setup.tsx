@@ -13,7 +13,7 @@ interface QuizSetupProps {
 
 export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
   const [selectedTables, setSelectedTables] = useState<number[]>([]);
-  const [questionCount, setQuestionCount] = useState<number>(20);
+  const [questionCount, setQuestionCount] = useState<number>(10);
   const [customCount, setCustomCount] = useState<string>('');
   const [timerEnabled, setTimerEnabled] = useState<boolean>(false);
   const [timePerQuestion, setTimePerQuestion] = useState<number>(10);
@@ -150,7 +150,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
               Number of Questions
             </h3>
             <div className="grid grid-cols-3 gap-3 mb-4">
-              {[10, 20, 30].map(count => (
+              {[5, 10, 15].map(count => (
                 <Button
                   key={count}
                   variant={questionCount === count && !customCount ? "default" : "outline"}
