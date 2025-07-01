@@ -130,14 +130,14 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                 <Button
                   key={key}
                   variant="outline"
-                  className={`py-3 px-4 h-auto flex-col ${config.colorClass} border-0`}
+                  className={`py-4 px-4 h-auto flex-col ${config.colorClass} border-2 border-current shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 font-semibold`}
                   onClick={() => selectDifficulty(key as DifficultyPreset)}
                 >
-                  <div className="flex items-center gap-1 mb-1">
+                  <div className="flex items-center gap-2 mb-2">
                     {getDifficultyIcon(key as DifficultyPreset)}
-                    {config.name}
+                    <span className="font-bold">{config.name}</span>
                   </div>
-                  <div className="text-xs opacity-75">
+                  <div className="text-xs opacity-80 font-medium">
                     {config.tables.join('×, ')}×
                   </div>
                 </Button>
@@ -159,7 +159,11 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                 <Button
                   key={count}
                   variant={questionCount === count && !customCount ? "default" : "outline"}
-                  className={questionCount === count && !customCount ? "bg-brand-purple hover:bg-purple-700" : ""}
+                  className={`py-3 px-4 font-bold text-lg border-2 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 ${
+                    questionCount === count && !customCount 
+                      ? "bg-gradient-to-r from-brand-purple to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white border-brand-purple" 
+                      : "border-brand-purple text-brand-purple hover:bg-purple-50"
+                  }`}
                   onClick={() => handleQuestionCountChange(count)}
                 >
                   {count}
@@ -229,10 +233,10 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
           )}
           <Button
             onClick={handleStartQuiz}
-            className="bg-gradient-to-r from-brand-purple to-brand-cyan text-white font-bold text-xl py-4 px-12 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+            className="bg-gradient-to-r from-brand-purple via-purple-600 to-brand-cyan text-white font-bold text-xl py-6 px-16 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300 border-0"
             size="lg"
           >
-            <Play className="h-6 w-6 mr-3" />
+            <Play className="h-7 w-7 mr-4" />
             Start Quiz Adventure!
           </Button>
           <p className="text-slate-600 mt-3">Get ready to show off your multiplication skills!</p>

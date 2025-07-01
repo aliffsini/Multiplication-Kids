@@ -92,6 +92,11 @@ This is a gamified multiplication quiz web application designed to help children
 ```
 Changelog:
 - July 01, 2025. Initial setup
+- July 01, 2025. Enhanced UI and quiz algorithm:
+  * Improved detailed review with better scrolling and visual formatting
+  * Enhanced quiz generator to prevent consecutive duplicate questions
+  * Upgraded button styling with gradients, shadows, and hover effects
+  * Added question numbering and status badges in results screen
 ```
 
 ## User Preferences

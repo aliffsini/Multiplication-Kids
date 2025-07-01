@@ -147,10 +147,11 @@ export function QuizInterface({
             {!hasSubmitted && (
               <Button
                 onClick={handleSubmit}
-                className="bg-brand-purple hover:bg-purple-700 text-white font-bold text-lg py-3 px-8"
+                className="bg-gradient-to-r from-brand-purple to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold text-lg py-4 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 border-0"
                 disabled={!userAnswer.trim()}
+                size="lg"
               >
-                <Check className="h-5 w-5 mr-2" />
+                <Check className="h-6 w-6 mr-3" />
                 Submit Answer
               </Button>
             )}
@@ -183,9 +184,10 @@ export function QuizInterface({
           <div className="text-center">
             <Button
               onClick={handleNext}
-              className="bg-white text-brand-purple font-bold text-lg py-3 px-8 hover:bg-opacity-90 transition-all duration-200"
+              className="bg-white text-brand-purple font-bold text-lg py-4 px-10 hover:bg-gray-50 border-2 border-white shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 rounded-xl"
+              size="lg"
             >
-              Next Question <ArrowRight className="h-5 w-5 ml-2" />
+              Next Question <ArrowRight className="h-6 w-6 ml-3" />
             </Button>
           </div>
         )}

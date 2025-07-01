@@ -86,24 +86,35 @@ export function ResultsScreen({ questions, score, onRestartQuiz, onNewQuiz }: Re
               <ClipboardList className="inline h-6 w-6 text-brand-purple mr-2" />
               Detailed Review
             </h3>
-            <ScrollArea className="max-h-96">
-              <div className="space-y-2">
+            <ScrollArea className="h-80 w-full rounded-lg border">
+              <div className="p-4 space-y-3">
                 {questions.map((question, index) => (
                   <div
                     key={question.id}
-                    className="flex items-center justify-between p-3 bg-slate-50 rounded-lg"
+                    className="flex items-center justify-between p-4 bg-slate-50 rounded-lg border shadow-sm"
                   >
-                    <span className="font-mono text-lg">
-                      {question.multiplicand} × {question.multiplier} = {question.answer}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-600">
-                        Your answer: {question.userAnswer ?? 'Not answered'}
+                    <div className="flex items-center gap-4">
+                      <span className="bg-slate-200 text-slate-700 font-bold px-3 py-1 rounded-full text-sm">
+                        #{index + 1}
+                      </span>
+                      <span className="font-mono text-lg font-semibold">
+                        {question.multiplicand} × {question.multiplier} = {question.answer}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-slate-600 font-medium">
+                        Your answer: <span className="font-bold">{question.userAnswer ?? 'Not answered'}</span>
                       </span>
                       {question.isCorrect ? (
-                        <CheckCircle className="h-5 w-5 text-success-green" />
+                        <div className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                          <CheckCircle className="h-4 w-4" />
+                          <span className="text-sm font-medium">Correct</span>
+                        </div>
                       ) : (
-                        <XCircle className="h-5 w-5 text-error-red" />
+                        <div className="flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                          <XCircle className="h-4 w-4" />
+                          <span className="text-sm font-medium">Wrong</span>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -117,21 +128,24 @@ export function ResultsScreen({ questions, score, onRestartQuiz, onNewQuiz }: Re
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             onClick={onRestartQuiz}
-            className="bg-white text-brand-purple font-bold text-lg py-3 px-8 hover:bg-opacity-90 transition-all duration-200"
+            size="lg"
+            className="bg-white text-brand-purple font-bold text-lg py-4 px-8 hover:bg-gray-50 border-2 border-brand-purple shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
           >
             <RotateCcw className="h-5 w-5 mr-2" />
             Try Again
           </Button>
           <Button
             onClick={onNewQuiz}
-            className="bg-brand-purple hover:bg-purple-700 text-white font-bold text-lg py-3 px-8 transition-colors duration-200"
+            size="lg"
+            className="bg-gradient-to-r from-brand-purple to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold text-lg py-4 px-8 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
           >
             <Plus className="h-5 w-5 mr-2" />
             New Quiz
           </Button>
           <Button
             onClick={handleShare}
-            className="bg-brand-amber hover:bg-yellow-500 text-white font-bold text-lg py-3 px-8 transition-colors duration-200"
+            size="lg"
+            className="bg-gradient-to-r from-brand-amber to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold text-lg py-4 px-8 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
           >
             <Share className="h-5 w-5 mr-2" />
             Share Results

@@ -18,9 +18,12 @@ export class QuizGenerator {
       }
     }
 
-    // Generate questions avoiding commutative duplicates
+    // Shuffle the possible pairs first to ensure variety
+    const shuffledPairs = this.shuffleArray([...possiblePairs]);
+
+    // Generate questions avoiding consecutive duplicates and commutative pairs
     for (let i = 0; i < questionCount; i++) {
-      const pair = this.selectNextPair(possiblePairs);
+      const pair = this.selectNextPair(shuffledPairs);
       
       questions.push({
         id: `q${i + 1}`,
@@ -32,21 +35,29 @@ export class QuizGenerator {
       this.addToRecentPairs(pair);
     }
 
-    return this.shuffleArray(questions);
+    // Don't shuffle at the end since we've carefully selected the order
+    return questions;
   }
 
   private selectNextPair(possiblePairs: Array<{ a: number; b: number }>): { a: number; b: number } {
     // Filter out pairs that would create commutative duplicates within the window
     const availablePairs = possiblePairs.filter(pair => {
-      return !this.isCommutativeDuplicate(pair);
+      return !this.isCommutativeDuplicate(pair) && !this.isConsecutiveDuplicate(pair);
     });
 
-    // If no pairs available (unlikely), use any pair
-    const pairsToChooseFrom = availablePairs.length > 0 ? availablePairs : possiblePairs;
+    // If no pairs available, try with just commutative filter
+    let pairsToChooseFrom = availablePairs;
+    if (pairsToChooseFrom.length === 0) {
+      pairsToChooseFrom = possiblePairs.filter(pair => !this.isCommutativeDuplicate(pair));
+    }
     
-    // Select random pair
-    const randomIndex = Math.floor(Math.random() * pairsToChooseFrom.length);
-    return pairsToChooseFrom[randomIndex];
+    // If still no pairs, use any pair (unlikely scenario)
+    if (pairsToChooseFrom.length === 0) {
+      pairsToChooseFrom = possiblePairs;
+    }
+    
+    // Select first available pair for better distribution
+    return pairsToChooseFrom[0];
   }
 
   private isCommutativeDuplicate(pair: { a: number; b: number }): boolean {
@@ -54,6 +65,13 @@ export class QuizGenerator {
       (recent.a === pair.a && recent.b === pair.b) ||
       (recent.a === pair.b && recent.b === pair.a)
     );
+  }
+
+  private isConsecutiveDuplicate(pair: { a: number; b: number }): boolean {
+    if (this.recentPairs.length === 0) return false;
+    const lastPair = this.recentPairs[this.recentPairs.length - 1];
+    return (lastPair.a === pair.a && lastPair.b === pair.b) ||
+           (lastPair.a === pair.b && lastPair.b === pair.a);
   }
 
   private addToRecentPairs(pair: { a: number; b: number }): void {
