@@ -101,19 +101,26 @@ export function ResultsScreen({ questions, score, onRestartQuiz, onNewQuiz }: Re
                         {question.multiplicand} × {question.multiplier} = {question.answer}
                       </span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-slate-600 font-medium">
-                        Your answer: <span className="font-bold">{question.userAnswer ?? 'Not answered'}</span>
-                      </span>
-                      {question.isCorrect ? (
-                        <div className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                          <CheckCircle className="h-4 w-4" />
-                          <span className="text-sm font-medium">Correct</span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded-full">
-                          <XCircle className="h-4 w-4" />
-                          <span className="text-sm font-medium">Wrong</span>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-3">
+                        <span className="text-slate-600 font-medium">
+                          Your answer: <span className="font-bold">{question.userAnswer ?? 'Not answered'}</span>
+                        </span>
+                        {question.isCorrect ? (
+                          <div className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                            <CheckCircle className="h-4 w-4" />
+                            <span className="text-sm font-medium">Correct</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                            <XCircle className="h-4 w-4" />
+                            <span className="text-sm font-medium">Wrong</span>
+                          </div>
+                        )}
+                      </div>
+                      {!question.isCorrect && (
+                        <div className="text-green-700 font-semibold text-sm bg-green-50 px-3 py-1 rounded-lg border border-green-200">
+                          Correct answer: {question.answer}
                         </div>
                       )}
                     </div>
@@ -129,7 +136,7 @@ export function ResultsScreen({ questions, score, onRestartQuiz, onNewQuiz }: Re
           <Button
             onClick={onRestartQuiz}
             size="lg"
-            className="bg-white text-brand-purple font-bold text-lg py-4 px-8 hover:bg-gray-50 border-2 border-brand-purple shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+            className="bg-white text-purple-900 font-bold text-lg py-4 px-8 hover:bg-gray-50 border-2 border-purple-900 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
           >
             <RotateCcw className="h-5 w-5 mr-2" />
             Try Again
