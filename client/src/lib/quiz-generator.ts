@@ -56,35 +56,67 @@ export class QuizGenerator {
     const questions: Question[] = [];
     const easyNumbers = [2, 10, 11]; // Numbers to avoid on any side
     let lastUsedTable: number | null = null;
+    const usedPairs = new Set<string>(); // Track used multiplication pairs
 
     // Filter available tables and multipliers to exclude easy numbers
     const availableTables = selectedTables.filter(table => !easyNumbers.includes(table));
     const availableMultipliers = [3, 4, 5, 6, 7, 8, 9, 12]; // Exclude 2, 10, 11
 
-    for (let i = 0; i < questionCount; i++) {
-      let selectedTable: number;
-      
-      // Ensure we don't use the same table consecutively
-      const eligibleTables = lastUsedTable 
-        ? availableTables.filter(table => table !== lastUsedTable)
-        : availableTables;
-      
-      // If no eligible tables (shouldn't happen), use any available table
-      selectedTable = eligibleTables.length > 0 
-        ? eligibleTables[Math.floor(Math.random() * eligibleTables.length)]
-        : availableTables[Math.floor(Math.random() * availableTables.length)];
+    // Generate all possible unique pairs first
+    const allPossiblePairs: Array<{ a: number; b: number }> = [];
+    for (const table of availableTables) {
+      for (const multiplier of availableMultipliers) {
+        const pairKey = `${Math.min(table, multiplier)}x${Math.max(table, multiplier)}`;
+        if (!allPossiblePairs.find(p => `${Math.min(p.a, p.b)}x${Math.max(p.a, p.b)}` === pairKey)) {
+          allPossiblePairs.push({ a: table, b: multiplier });
+        }
+      }
+    }
 
-      // Select a random multiplier (excluding easy numbers)
-      const selectedMultiplier = availableMultipliers[Math.floor(Math.random() * availableMultipliers.length)];
-      
+    // Shuffle the pairs to ensure variety
+    const shuffledPairs = this.shuffleArray([...allPossiblePairs]);
+
+    for (let i = 0; i < questionCount && i < shuffledPairs.length; i++) {
+      let selectedPair: { a: number; b: number } | null = null;
+
+      // Find a pair that doesn't use the same table as the last question
+      for (const pair of shuffledPairs) {
+        const pairKey = `${Math.min(pair.a, pair.b)}x${Math.max(pair.a, pair.b)}`;
+        const tableInPair = pair.a;
+        
+        if (!usedPairs.has(pairKey) && 
+            (lastUsedTable === null || tableInPair !== lastUsedTable)) {
+          selectedPair = pair;
+          usedPairs.add(pairKey);
+          break;
+        }
+      }
+
+      // If no valid pair found (rare case), try any unused pair
+      if (!selectedPair) {
+        for (const pair of shuffledPairs) {
+          const pairKey = `${Math.min(pair.a, pair.b)}x${Math.max(pair.a, pair.b)}`;
+          if (!usedPairs.has(pairKey)) {
+            selectedPair = pair;
+            usedPairs.add(pairKey);
+            break;
+          }
+        }
+      }
+
+      // If still no pair found, we've exhausted unique combinations
+      if (!selectedPair) {
+        break;
+      }
+
       questions.push({
         id: `q${i + 1}`,
-        multiplicand: selectedTable,
-        multiplier: selectedMultiplier,
-        answer: selectedTable * selectedMultiplier
+        multiplicand: selectedPair.a,
+        multiplier: selectedPair.b,
+        answer: selectedPair.a * selectedPair.b
       });
 
-      lastUsedTable = selectedTable;
+      lastUsedTable = selectedPair.a;
     }
 
     return questions;
