@@ -9,7 +9,14 @@ export class QuizGenerator {
     const questions: Question[] = [];
     this.recentPairs = [];
 
-    // Generate all possible combinations
+    // Check if this is special mode (specific tables: 3,4,5,6,7,8,9,12)
+    const isSpecialMode = this.isSpecialMode(selectedTables);
+
+    if (isSpecialMode) {
+      return this.generateSpecialModeQuestions(selectedTables, questionCount);
+    }
+
+    // Regular mode generation
     const possiblePairs: Array<{ a: number; b: number }> = [];
     
     for (const table of selectedTables) {
@@ -35,7 +42,51 @@ export class QuizGenerator {
       this.addToRecentPairs(pair);
     }
 
-    // Don't shuffle at the end since we've carefully selected the order
+    return questions;
+  }
+
+  private isSpecialMode(selectedTables: number[]): boolean {
+    const specialTables = [3, 4, 5, 6, 7, 8, 9, 12];
+    return selectedTables.length === specialTables.length && 
+           selectedTables.every(table => specialTables.includes(table)) &&
+           specialTables.every(table => selectedTables.includes(table));
+  }
+
+  private generateSpecialModeQuestions(selectedTables: number[], questionCount: number): Question[] {
+    const questions: Question[] = [];
+    const easyNumbers = [2, 10, 11]; // Numbers to avoid on any side
+    let lastUsedTable: number | null = null;
+
+    // Filter available tables and multipliers to exclude easy numbers
+    const availableTables = selectedTables.filter(table => !easyNumbers.includes(table));
+    const availableMultipliers = [3, 4, 5, 6, 7, 8, 9, 12]; // Exclude 2, 10, 11
+
+    for (let i = 0; i < questionCount; i++) {
+      let selectedTable: number;
+      
+      // Ensure we don't use the same table consecutively
+      const eligibleTables = lastUsedTable 
+        ? availableTables.filter(table => table !== lastUsedTable)
+        : availableTables;
+      
+      // If no eligible tables (shouldn't happen), use any available table
+      selectedTable = eligibleTables.length > 0 
+        ? eligibleTables[Math.floor(Math.random() * eligibleTables.length)]
+        : availableTables[Math.floor(Math.random() * availableTables.length)];
+
+      // Select a random multiplier (excluding easy numbers)
+      const selectedMultiplier = availableMultipliers[Math.floor(Math.random() * availableMultipliers.length)];
+      
+      questions.push({
+        id: `q${i + 1}`,
+        multiplicand: selectedTable,
+        multiplier: selectedMultiplier,
+        answer: selectedTable * selectedMultiplier
+      });
+
+      lastUsedTable = selectedTable;
+    }
+
     return questions;
   }
 

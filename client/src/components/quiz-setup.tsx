@@ -71,6 +71,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
       case 'medium': return <Flame className="h-4 w-4" />;
       case 'hard': return <Gem className="h-4 w-4" />;
       case 'extreme': return <Crown className="h-4 w-4" />;
+      case 'special': return <span className="text-sm">⭐</span>;
     }
   };
 
@@ -140,7 +141,7 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
               <Bolt className="inline h-5 w-5 text-brand-amber mr-2" />
               Multiplication Difficulty Levels
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {Object.entries(DIFFICULTY_PRESETS).map(([key, config]) => (
                 <Button
                   key={key}
@@ -153,7 +154,9 @@ export function QuizSetup({ onStartQuiz }: QuizSetupProps) {
                     <span className="font-bold">{config.name}</span>
                   </div>
                   <div className="text-xs opacity-80 font-medium">
-                    {key === 'extreme' ? 'All tables' : config.tables.join('×, ') + '×'}
+                    {key === 'extreme' ? 'All tables' : 
+                     key === 'special' ? 'No easy numbers' : 
+                     config.tables.join('×, ') + '×'}
                   </div>
                 </Button>
               ))}

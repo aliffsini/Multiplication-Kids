@@ -25,7 +25,7 @@ export interface QuizState {
   endTime?: number;
 }
 
-export type DifficultyPreset = 'easy' | 'medium' | 'hard' | 'extreme';
+export type DifficultyPreset = 'easy' | 'medium' | 'hard' | 'extreme' | 'special';
 
 export interface DifficultyConfig {
   name: string;
@@ -58,5 +58,11 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPreset, DifficultyConfig> = {
     tables: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     icon: '👑',
     colorClass: 'bg-purple-100 hover:bg-purple-200 text-purple-700'
+  },
+  special: {
+    name: 'Special',
+    tables: [3, 4, 5, 6, 7, 8, 9, 12],
+    icon: '⭐',
+    colorClass: 'bg-gradient-to-r from-indigo-100 to-violet-100 hover:from-indigo-200 hover:to-violet-200 text-indigo-700'
   }
 };
