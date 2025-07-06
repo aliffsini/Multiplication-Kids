@@ -150,7 +150,7 @@ export function QuizInterface({
                 onChange={(e) => setUserAnswer(e.target.value)}
                 onKeyPress={handleKeyPress}
                 disabled={hasSubmitted}
-                className="text-4xl font-bold text-center w-32 h-16 border-4 border-slate-300 focus:border-brand-purple mx-auto"
+                className="text-4xl font-bold text-center w-32 h-16 border-4 border-slate-300 focus:border-brand-purple mx-auto [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
                 placeholder="?"
               />
             </div>
