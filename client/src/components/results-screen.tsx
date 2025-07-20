@@ -16,6 +16,7 @@ export function ResultsScreen({ questions, score, onRestartQuiz, onNewQuiz }: Re
   const totalQuestions = questions.length;
   const percentage = Math.round((score / totalQuestions) * 100);
   const achievement = quizGenerator.getAchievement(score, totalQuestions);
+  const completedAt = new Date().toLocaleString();
 
   const handleShare = async () => {
     const shareText = `I scored ${score}/${totalQuestions} (${percentage}%) on my multiplication quiz! 🎉`;
@@ -64,6 +65,7 @@ export function ResultsScreen({ questions, score, onRestartQuiz, onNewQuiz }: Re
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">🏆</div>
           <h2 className="text-4xl font-bold mb-4">Multiplication Quiz Results</h2>
+          <div className="text-lg opacity-90 mb-4">Completed: {completedAt}</div>
           <Card className="max-w-md mx-auto">
             <CardContent className="pt-6 text-slate-800">
               <div className={`text-5xl font-bold mb-2 ${getScoreColor()}`}>
